@@ -2,7 +2,7 @@
 #include "wdt.h"
 
 
-static uint16_t seconds;
+static volatile uint16_t seconds;
 
 void timer_init(){
     seconds = 0;

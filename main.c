@@ -18,7 +18,9 @@ int main(){
 
     sei();                  // enable interrupts
     while(1){
-
+        PORTB ^= (1 << PB2);
+        counter_reset();
+        while(get_seconds() < 2);
     }
     return 0;
 }
