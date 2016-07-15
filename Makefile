@@ -2,8 +2,8 @@ CC = avr-gcc
 OBJC = avr-objcopy
 
 MCU = attiny85
-# f = 8MHz
-F_CPU = 8000000
+# f = 1MHz
+F_CPU = 1000000
 
 # compiler flags
 CFLAGS = -Wall -Os -mmcu=$(MCU) -DF_CPU=$(F_CPU)
