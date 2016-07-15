@@ -2,8 +2,8 @@ CC = avr-gcc
 OBJC = avr-objcopy
 
 MCU = attiny85
-# f = 8MHz
-F_CPU = 8000000
+# f = 1MHz
+F_CPU = 1000000
 
 # compiler flags
 CFLAGS = -Wall -Os -mmcu=$(MCU) -DF_CPU=$(F_CPU)
@@ -15,11 +15,16 @@ BAUDRATE = 19200
 # avrdude flags
 PFLAGS = -P $(PORT) -c $(PROGRAMMER) -b $(BAUDRATE) -p $(MCU)
 
-all:
-	$(CC) $(CFLAGS) -o main.o main.c
-	$(OBJC) -j .text -j .data -O ihex main.o main.hex
+OBJS = main.o wdt.o
+
+all:	$(OBJS)
+	$(CC) $(CFLAGS) -o main.out $(OBJS)
+	$(OBJC) -j .text -j .data -O ihex main.out main.hex
 	avrdude $(PFLAGS) -U flash:w:main.hex:i
 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $<
+
 clean:
-	rm -rvf main.o main.hex
+	rm -rvf *.o main.out main.hex
 
