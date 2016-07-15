@@ -1,17 +1,21 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/power.h>
+#include <avr/wdt.h>
 
-
-volatile uint16_t ticks = 0;
 
 int main(){
+    cli();                  // disable interrupts
+    // WDT disable
+    MCUSR &= ~(1 << WDRF);
+    WDTCR |= ((1 << WDCE) | (1 << WDE));  // change enable
+    WDTCR = 0x00;
+
     clock_prescale_set(clock_div_1);
 
-    TIMSK |= (1 << OCIE0A); // interrupt on compare
-    TCCR0B |= (1 << CS00);  // no prescaler T = 1.25e-7 S
-    TCNT0 = 0;              // counter = 0
-    OCR0A = 0xC8;           // interrupt each 25uS
+    // WDT enable
+    WDTCR |= ((1 << WDCE) | (1 << WDE));  // change enable
+    WDTCR = (1 << WDIE) | (1 << WDP1) | (1 << WDP2);  // int enabled & 1s timeout
 
     DDRB = 0x00;
     DDRB |= (1 << PB2);     // PB2 as outputs
@@ -23,12 +27,6 @@ int main(){
     return 0;
 }
 
-ISR(TIM0_COMPA_vect){
-    ticks++;
-    // toggle PB2 each 0.5 second
-    if(ticks == 20000){ // 25e-6 * 20000 = 0.5 S
-        PORTB ^= (1 << PB2);
-        ticks = 0;
-    }
+ISR(WDT_vect){
+    PORTB ^= (1 << PB2);
 }
-
