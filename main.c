@@ -1,6 +1,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/power.h>
+#include "timer.h"
 #include "wdt.h"
 
 
@@ -10,7 +11,7 @@ int main(){
 
     clock_prescale_set(clock_div_1);
 
-    WDT_enable();           // enable WDT
+    timer_init();           // init timer based on WDT
 
     DDRB = 0x00;
     DDRB |= (1 << PB2);     // PB2 as outputs
