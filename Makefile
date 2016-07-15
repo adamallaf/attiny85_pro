@@ -15,15 +15,17 @@ BAUDRATE = 19200
 # avrdude flags
 PFLAGS = -P $(PORT) -c $(PROGRAMMER) -b $(BAUDRATE) -p $(MCU)
 
-OBJS = main.o wdt.o wdt_isr.o
+OBJS = main.o wdt.o wdt_isr.o timer.o
 
 all:	$(OBJS)
 	$(CC) $(CFLAGS) -o main.out $(OBJS)
 	$(OBJC) -j .text -j .data -O ihex main.out main.hex
-	avrdude $(PFLAGS) -U flash:w:main.hex:i
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
+
+install:	all
+	avrdude $(PFLAGS) -U flash:w:main.hex:i
 
 clean:
 	rm -rvf *.o main.out main.hex
