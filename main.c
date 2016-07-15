@@ -22,6 +22,3 @@ int main(){
     return 0;
 }
 
-ISR(WDT_vect){
-    PORTB ^= (1 << PB2);
-}
