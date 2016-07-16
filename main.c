@@ -3,6 +3,8 @@
 #include <avr/power.h>
 #include "timer.h"
 #include "wdt.h"
+#include "state_machine.h"
+#include "states.h"
 
 
 int main(){
@@ -11,6 +13,8 @@ int main(){
 
     clock_prescale_set(clock_div_1);
 
+    state_init(led_toggle);
+
     timer_init();           // init timer based on WDT
 
     DDRB = 0x00;
@@ -18,9 +22,7 @@ int main(){
 
     sei();                  // enable interrupts
     while(1){
-        PORTB ^= (1 << PB2);
-        counter_reset();
-        while(get_seconds() < 2);
+        state_exec();
     }
     return 0;
 }

@@ -13,5 +13,7 @@ uint16_t get_seconds();
 
 void counter_reset();
 
+void s_delay(uint16_t );
+
 #endif
 
