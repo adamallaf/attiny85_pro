@@ -11,3 +11,7 @@ void state_exec(){
     statePtr = (StateFunc)(*statePtr)();
 }
 
+void state_update(StateFunc state){
+    statePtr = state;
+}
+

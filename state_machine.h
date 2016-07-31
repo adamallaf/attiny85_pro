@@ -8,5 +8,7 @@ void state_init(StateFunc );
 
 void state_exec();
 
+void state_update(StateFunc);
+
 #endif
 
