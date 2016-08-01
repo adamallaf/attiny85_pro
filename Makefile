@@ -1,6 +1,10 @@
 CC = avr-gcc
 OBJC = avr-objcopy
 
+SRCDIR = src
+OBJDIR = obj
+BINDIR = bin
+
 MCU = attiny85
 # f = 1MHz
 F_CPU = 1000000
@@ -17,16 +21,20 @@ PFLAGS = -P $(PORT) -c $(PROGRAMMER) -b $(BAUDRATE) -p $(MCU)
 
 OBJS = main.o wdt.o wdt_isr.o timer.o state_machine.o states.o portb_isr.o timer0_isr.o
 
-all:	$(OBJS)
-	$(CC) $(CFLAGS) -o main.out $(OBJS)
-	$(OBJC) -j .text -j .data -O ihex main.out main.hex
+all:	dirs	$(OBJS)
+	$(CC) $(CFLAGS) -o $(OBJDIR)/main.out $(addprefix $(OBJDIR)/,$(OBJS))
+	$(OBJC) -j .text -j .data -O ihex $(OBJDIR)/main.out $(BINDIR)/main.hex
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $<
+%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $(OBJDIR)/$@
+
+dirs:
+	mkdir $(OBJDIR)
+	mkdir $(BINDIR)
 
 install:	all
-	avrdude $(PFLAGS) -U flash:w:main.hex:i
+	avrdude $(PFLAGS) -U flash:w:$(BINDIR)/main.hex:i
 
 clean:
-	rm -rvf *.o main.out main.hex
+	rm -rvf $(OBJDIR) $(BINDIR)
 
