@@ -15,7 +15,7 @@ BAUDRATE = 19200
 # avrdude flags
 PFLAGS = -P $(PORT) -c $(PROGRAMMER) -b $(BAUDRATE) -p $(MCU)
 
-OBJS = main.o wdt.o wdt_isr.o timer.o state_machine.o states.o portb_isr.o
+OBJS = main.o wdt.o wdt_isr.o timer.o state_machine.o states.o portb_isr.o timer0_isr.o
 
 all:	$(OBJS)
 	$(CC) $(CFLAGS) -o main.out $(OBJS)
