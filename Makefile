@@ -29,12 +29,12 @@ all:	dirs	$(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $(OBJDIR)/$@
 
 dirs:
-	mkdir $(OBJDIR)
-	mkdir $(BINDIR)
+	@mkdir $(OBJDIR)
+	@mkdir $(BINDIR)
 
 install:	all
 	avrdude $(PFLAGS) -U flash:w:$(BINDIR)/main.hex:i
 
 clean:
-	rm -rvf $(OBJDIR) $(BINDIR)
+	@rm -rf $(OBJDIR) $(BINDIR)
 
