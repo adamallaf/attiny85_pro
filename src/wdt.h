@@ -6,9 +6,9 @@
 #include <avr/wdt.h>
 
 
-inline void WDT_disable();
+void WDT_disable();
 
-inline void WDT_enable();
+void WDT_enable();
 
 #endif
 
