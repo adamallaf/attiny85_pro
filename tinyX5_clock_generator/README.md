@@ -8,4 +8,7 @@ Microswitch bi-stable ON-ON on pin PB3, 10k pull-up, switches between continuous
 
 Potentiometer at **ADC2** (PB4)
 External ADC  reference, **AREF** (PB0) set to 2.07V vida voltage divder:
+
 `R1 = 3k; R2 = 1k8 + 330 = 2k130`
+
+![potentiometer](https://raw.githubusercontent.com/adamallaf/attiny85_pro/master/tinyX5_clock_generator/ng_spice/potentiometer_plot.jpg)
