@@ -1,0 +1,171 @@
+    .file "tn85def.S"
+
+SREG = 0x3F
+_SPH = 0x3E
+_SPL = 0x3D
+GIMSK = 0x3B
+GIFR = 0x3A
+TIMSK = 0x39
+TIFR = 0x38
+SPMCSR = 0x37
+MCUCR = 0x35
+MCUSR = 0x34
+TCCR0B = 0x33
+TCBT0 = 0x32
+OSCCAL = 0x31
+TCCR1 = 0x30
+TCNT1 = 0x2F
+OCR1A = 0x2E
+OCR1C = 0x2D
+GTCCR = 0X2C
+OCR1B = 0X2B
+TCCR0A = 0X2A
+OCR0A = 0X29
+OCR0B = 0x28
+PLLCSR = 0x27
+CLKPR = 0x26
+WDTCR = 0x21
+/* GPIO */
+PORTB = 0x18
+DDRB = 0x17
+PINB = 0x16
+PCMSK = 0x15
+DIDR0 = 0x14
+GPIO2 = 0x13
+GPIO1 = 0x12
+GPIO0 = 0x11
+USIBR = 0x10
+USIDR = 0x0F
+USISR = 0x0E
+USICR = 0x0D
+/* ADC */
+ACSR = 0X08
+ADMUX = 0X07
+ADCSRA = 0X06
+ADCH = 0x05
+ADCL = 0x04
+ADCSRB = 0x03
+/* */
+__ZERO_REG__ = 0x01
+
+BIT0 = 0
+BIT1 = 1
+BIT2 = 2
+BIT3 = 3
+BIT4 = 4
+BIT5 = 5
+BIT6 = 6
+BIT7 = 7
+
+MBIT0 = 0x01
+MBIT1 = 0x02
+MBIT2 = 0x04
+MBIT3 = 0x08
+MBIT4 = 0x10
+MBIT5 = 0x20
+MBIT6 = 0x40
+MBIT7 = 0x80
+
+PB0     =   (1 << BIT0)
+PB1     =   (1 << BIT1)
+PB2     =   (1 << BIT2)
+PB3     =   (1 << BIT3)
+PB4     =   (1 << BIT4)
+PB5     =   (1 << BIT5)
+
+/* GIMSK */
+PCIE    =   MBIT5
+INT0    =   MBIT6
+
+/* PCMSK */
+PCINT0  =   MBIT0
+PCINT1  =   MBIT1
+PCINT2  =   MBIT2
+PCINT3  =   MBIT3
+PCINT4  =   MBIT4
+PCINT5  =   MBIT5
+
+/* ADMUX */
+ADC0    =   0x00
+ADC1    =   0x01
+ADC2    =   0x02
+ADC3    =   0x03
+ADC4    =   0x0F
+ADC_GND =   0x0D
+ADLAR   =   MBIT5
+/*REFS0/1/2 = 6/7/4*/
+REFS0   =   MBIT6
+REFS1   =   MBIT7
+REFS2   =   MBIT4
+/* ADCSRA */
+ADPS0   =   MBIT0
+ADPS1   =   MBIT1
+ADPS2   =   MBIT2
+ADIE    =   MBIT3
+ADIF    =   MBIT4
+ADATE   =   MBIT5
+ADSC    =   MBIT6
+ADEN    =   MBIT7
+/* DIDR0 */
+AIN0D   =   MBIT0
+AIN1D   =   MBIT1
+ADC1D   =   MBIT2
+ADC3D   =   MBIT3
+ADC2D   =   MBIT4
+ADC0D   =   MBIT5
+/* TIMSK */
+TOIE0   =   MBIT1
+TOIE1   =   MBIT2
+OCIE0B  =   MBIT3
+OCIE0A  =   MBIT4
+OCIE1B  =   MBIT5
+OCIE1A  =   MBIT6
+/* TCCR0A */
+WGM00   =   MBIT0
+WGM01   =   MBIT1
+COM0B0  =   MBIT4
+COM0B1  =   MBIT5
+COM0A0  =   MBIT6
+COM0A1  =   MBIT7
+/* TCCR0B */
+CS00    =   MBIT0
+CS01    =   MBIT1
+CS02    =   MBIT2
+WGM02   =   MBIT3
+FOC0B   =   MBIT6
+FOC0A   =   MBIT7
+/* TIFR */
+TOV0    =   MBIT1
+TOV1    =   MBIT2
+OCF0B   =   MBIT3
+OCF0A   =   MBIT4
+OCF1B   =   MBIT5
+OCF1A   =   MBIT6
+/* TCCR1 */
+CS10    =   MBIT0
+CS11    =   MBIT1
+CS12    =   MBIT2
+CS13    =   MBIT3
+COM1A0  =   MBIT4
+COM1A1  =   MBIT5
+PWM1A   =   MBIT6
+CTC1    =   MBIT7
+/* GTCCR */
+PSR0    =   MBIT0
+PSR1    =   MBIT1
+FOC1A   =   MBIT2
+FOC1B   =   MBIT3
+COM1B0  =   MBIT4
+COM1B1  =   MBIT5
+PWM1B   =   MBIT6
+TSM     =   MBIT7
+/* PLLCSR */
+PLOCK   =   MBIT0
+PLLE    =   MBIT1
+PCKE    =   MBIT2
+LSM     =   MBIT7
+
+.macro  outi    a b
+        ldi     r16, \b
+        out     \a, r16
+.endm
