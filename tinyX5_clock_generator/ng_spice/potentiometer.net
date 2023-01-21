@@ -9,13 +9,8 @@ V1 1 0 DC 5
 .dc R2 1 1e4 0.1
 .control
 run
-*tran 10u 1 0 uic
-*let Vin = tran1.v(1)
-*let Vout = tran1.v(2)
 let Vout = dc1.v(3)
-*plot Vin Vout
 plot Vout
 hardcopy plot.ps Vout
-*quit
 .endc
 .end
