@@ -15,11 +15,13 @@ BAUDRATE = 19200
 # avrdude flags
 PFLAGS = -P $(PORT) -c $(PROGRAMMER) -b $(BAUDRATE) -p $(MCU)
 
+.PHONY:	all	install	clean
 all:
 	$(CC) $(CFLAGS) -o main.o main.c
 	$(OBJC) -j .text -j .data -O ihex main.o main.hex
+
+install:
 	avrdude $(PFLAGS) -U flash:w:main.hex:i
 
 clean:
 	rm -rvf main.o main.hex
-

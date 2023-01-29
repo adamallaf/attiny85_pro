@@ -1,6 +1,6 @@
     .file "tiny_clock_gen.S"
 .nolist
-.include "tn85def.inc"
+.include "../tn85def.inc"
 .list
 
     .text
