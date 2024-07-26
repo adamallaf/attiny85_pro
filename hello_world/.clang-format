@@ -1,0 +1,15 @@
+
+---
+BasedOnStyle:     LLVM
+Language:         Cpp
+LineEnding:       LF
+IndentWidth:      4
+Standard:         Latest
+SpacesInParens:   Custom
+SpacesInParensOptions:
+  InConditionalStatements: true
+TabWidth:         4
+UseTab:           ForContinuationAndIndentation
+RemoveSemicolon:  true
+...
+
